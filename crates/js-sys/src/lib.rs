@@ -2066,6 +2066,7 @@ impl Object {
 // Proxy
 #[wasm_bindgen]
 extern {
+    #[wasm_bindgen(extends = Object)]
     #[derive(Clone, Debug)]
     pub type Proxy;
 
@@ -3010,7 +3011,6 @@ pub mod WebAssembly {
 // JSON
 #[wasm_bindgen]
 extern "C" {
-
     #[derive(Clone, Debug)]
     pub type JSON;
 

@@ -1,6 +1,7 @@
 use wasm_bindgen::prelude::*;
 use wasm_bindgen_test::*;
 use js_sys::*;
+use wasm_bindgen::JsCast;
 
 #[wasm_bindgen(module = "tests/wasm/Proxy.js")]
 extern {
@@ -43,4 +44,12 @@ fn revocable() {
     assert!(obj.a().is_err());
     assert!(obj.b().is_err());
     assert!(JsValue::from(obj).is_object());
+}
+
+#[wasm_bindgen_test]
+fn proxy_inheritance() {
+    let proxy = Proxy::new(&proxy_target(), &proxy_handler());
+
+    assert!(proxy.is_instance_of::<Object>());
+    let _: &Object = proxy.as_ref();
 }
